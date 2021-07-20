@@ -1,0 +1,16 @@
+
+.caption-full{
+	padding:9px;
+}
+.thumbnail{
+	padding:0px;
+}
+.thing p{
+	line-height:1.4;
+}
+#phone {
+	margin: 0 0 0px;
+}
+#delete-form {
+	dispaly:inline;
+}

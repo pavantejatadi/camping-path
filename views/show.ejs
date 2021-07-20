@@ -1,0 +1,74 @@
+<%- include("partials/header") %>
+<div class=container>
+<div class="row">
+	<div class="col-md-3">
+		<p class="lead">
+			Camping Path
+		</p>
+		<div class="list-group">
+			<li class="list-group-item active ">info 1</li>
+			<li class="list-group-item">info 2</li>
+			<li class="list-group-item">info 3</li>
+		</div>
+	</div>
+	<div class="col-md-9">
+		<div class="thumbnail">
+		<img class="img-responsive" src="<%= campground.image %>">	
+			<div class="caption-full">
+				<h3>
+					<%= campground.name %>
+					<span class="pull-right">$<%= campground.price %>/night</span>
+				</h3>
+				
+			</div>
+			
+			<p>
+				<%= campground.description %>
+			</p>
+			<P>
+				<em>submitted By - <%= campground.author.username %></em>
+			</P>
+			<% if(currentUser && (campground.author.id.equals(currentUser._id))){ %>
+			<a href="<%= campground._id %>/update" class="btn btn-warning">edit</a>
+			<form style="display:inline" action="<%= campground._id %>?_method=DELETE" method="POST">
+				<button  class="btn btn-danger">
+					delete
+				</button>
+			</form>
+			<% } %>
+		</div>
+		<div class="well">
+			<div class="text-right">
+				<a class="pull-right btn  btn-success" href="<%= campground._id %>/comments/new">add new comment</a>	
+			</div>
+			
+			<div class="row thing">
+				<hr>
+				<div class="col-sm-12">
+					<% campground.comments.forEach(function(x){ %>
+			<p style="margin-bottom:0px;"><strong ><%= x.author.username %></strong>
+				<span class="pull-right">10 days ago</span>
+					</p>
+			<p><%= x.text %></p>
+				<% if(currentUser && (x.author.id.equals(currentUser._id))){ %>
+				<a class="btn btn-xs btn-warning" href="<%= campground._id %>/comments/<%= x._id %>/update">edit</a>
+				<form style="display:inline;" action="<%= campground._id %>/comments/<%= x._id %>?_method=DELETE" method="POST">
+					<button class="btn btn-xs btn-danger">
+						delete
+					</button>
+					</form>
+				<% } %>
+			<% }); %>
+				</div>
+				</div>
+				
+			
+		</div>
+	</div>
+</div>
+</div>
+
+
+
+
+<%- include("partials/footer") %>
